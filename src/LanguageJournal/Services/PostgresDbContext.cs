@@ -13,6 +13,8 @@ namespace LanguageJournal.Services {
         public DbSet<Language> Languages { get; set; }
         public DbSet<UserLanguage> UserLanguages { get; set; }
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<Entry> Entries { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
