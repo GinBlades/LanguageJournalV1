@@ -32,17 +32,28 @@ namespace LanguageJournal.Controllers {
 
         // POST api/users
         [HttpPost]
-        public void Post([FromBody]string value) {
+        public User Post([FromBody]User user) {
+            _db.Users.Add(user);
+            _db.SaveChanges();
+            return user;
+
         }
 
         // PUT api/users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value) {
+        public User Put(int id, [FromBody]User user) {
+            user.UserId = id;
+            _db.Entry(user).State = EntityState.Modified;
+            _db.SaveChanges();
+            return user;
         }
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
         public void Delete(int id) {
+            var user = _db.Users.Where(u => u.UserId == id).FirstOrDefault();
+            _db.Users.Remove(user);
+            _db.SaveChanges();
         }
     }
 }
