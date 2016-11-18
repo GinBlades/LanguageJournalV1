@@ -18,8 +18,7 @@ gulp.task("sass", () => {
 gulp.task("vendorJs", () => {
     return gulp.src([
         "bower_components/jquery/dist/jquery.js",
-        "bower_components/tether/dist/js/tether.js",
-        "bower_components/bootstrap/dist/js/bootstrap.js"
+        "bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"
     ])
         .pipe(plumber())
         .pipe(sourcemaps.init())
