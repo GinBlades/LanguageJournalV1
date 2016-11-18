@@ -1,1 +1,26 @@
-﻿<h1>This is a test</h1>
+﻿<html>
+<head>
+    <title>Language Journal</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Libraries -->
+    <script src="~/core-js/client/shim.min.js"></script>
+    <script src="~/zone.js/dist/zone.js"></script>
+    <script src="~/reflect-metadata/Reflect.js"></script>
+    <script src="~/systemjs/dist/system.src.js"></script>
+
+    <!-- Configure SystemJS -->
+    <script src="~/systemjs.config.js"></script>
+    <script>
+        System.import("app").catch(
+            function (err) {
+                console.log(err);
+            }
+        )
+    </script>
+</head>
+<body>
+    <my-app>Loading...</my-app>
+</body>
+</html>
