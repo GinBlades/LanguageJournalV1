@@ -2,6 +2,6 @@
 
 @Component({
     selector: "my-app",
-    template: "<h1>Hello Angular!</h1>"
+    template: "<h1>I've got a lovely bunch of coconuts.</h1>"
 })
 export class AppComponent { }

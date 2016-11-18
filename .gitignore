@@ -3,3 +3,5 @@ obj/
 .vs/
 wwwroot/
 node_modules/
+bower_components/
+typings/

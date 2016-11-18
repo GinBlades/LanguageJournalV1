@@ -1,6 +1,9 @@
 ﻿var gulp = require("gulp"),
-    sourcemaps = require("gulp-sourcemaps"),
-    ts = require("gulp-typescript");
+    ts = require("gulp-typescript"),
+    sass = require("gulp-sass"),
+    plumber = require("gulp-plumber"),
+    watch = require("gulp-watch"),
+    batch = require("gulp-batch");
 
 // This doesn't finish properly when the task claims to be finished.
 // There is probably a way I need to modify this so that it works properly with streams.
@@ -20,13 +23,30 @@ gulp.task("tsc", () => {
     let tsProject = ts.createProject("tsconfig.json");
 
     let tsResult = gulp.src("Client/**/*.ts")
+        .pipe(plumber())
         .pipe(tsProject());
 
     return tsResult.js.pipe(gulp.dest("wwwroot"));
 });
 
+gulp.task("sass", () => {
+    return gulp.src("Client/**/*.scss")
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(gulp.dest("wwwroot"));
+});
+
 gulp.task("build", ["copyNpm", "tsc"]);
 
-gulp.task('default', ["build"], () => {
+gulp.task("watch", () => {
+    watch("Client/**/*.ts", batch((events, done) => {
+        gulp.start("tsc", done);
+    }));
+    watch("Client/**/*.scss", batch((events, done) => {
+        gulp.start("sass", done);
+    }));
+})
+
+gulp.task('default', ["build", "watch"], () => {
     // place code for your default task here
 });
