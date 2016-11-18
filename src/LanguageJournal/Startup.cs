@@ -37,6 +37,7 @@ namespace LanguageJournal {
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }
