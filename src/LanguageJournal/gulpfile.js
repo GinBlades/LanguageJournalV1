@@ -1,4 +1,6 @@
-﻿var gulp = require("gulp"),
+﻿"use strict";
+
+var gulp = require("gulp"),
     ts = require("gulp-typescript"),
     sass = require("gulp-sass"),
     plumber = require("gulp-plumber"),
@@ -36,7 +38,7 @@ gulp.task("sass", () => {
         .pipe(gulp.dest("wwwroot"));
 });
 
-gulp.task("build", ["copyNpm", "tsc"]);
+gulp.task("build", ["copyNpm", "tsc", "sass"]);
 
 gulp.task("watch", () => {
     watch("Client/**/*.ts", batch((events, done) => {
