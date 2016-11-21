@@ -1,0 +1,20 @@
+﻿h1 This is the users page.
+.row
+    .col-md-6
+        ul
+            li(*ngFor="let user of users")
+                a((click)="showUser(user.userId)") {{user.name}}
+    .col-md-6(*ngIf="activeUser")
+        h3 Active User
+        dl.dl-horizontal
+            dt
+                label(for="UserId") ID
+            dd {{activeUser.userId}}
+            dt
+                label(for="name") Name
+            dd
+                input([(ngModel)]="activeUser.name")
+            dt Email
+            dd {{activeUser.email}}
+            dt Bio
+            dd {{activeUser.bio}}

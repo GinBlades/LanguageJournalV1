@@ -5,7 +5,8 @@ var gulp = require("gulp"),
     sass = require("gulp-sass"),
     plumber = require("gulp-plumber"),
     watch = require("gulp-watch"),
-    batch = require("gulp-batch");
+    batch = require("gulp-batch"),
+    pug = require("gulp-pug");
 
 // This doesn't finish properly when the task claims to be finished.
 // There is probably a way I need to modify this so that it works properly with streams.
@@ -38,6 +39,15 @@ gulp.task("sass", () => {
         .pipe(gulp.dest("wwwroot"));
 });
 
+gulp.task("pug", () => {
+    return gulp.src("Client/**/*.pug")
+        .pipe(plumber())
+        .pipe(pug({
+            pretty: true
+        }))
+        .pipe(gulp.dest("wwwroot"));
+})
+
 gulp.task("build", ["copyNpm", "tsc", "sass"]);
 
 gulp.task("watch", () => {
@@ -46,6 +56,9 @@ gulp.task("watch", () => {
     }));
     watch("Client/**/*.scss", batch((events, done) => {
         gulp.start("sass", done);
+    }));
+    watch("Client/**/*.pug", batch((events, done) => {
+        gulp.start("pug", done);
     }));
 })
 
