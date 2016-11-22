@@ -35,7 +35,7 @@ export class UsersComponent {
         this.userService.delete(userId)
             .subscribe(_ => this.refresh());
     }
-
+    
     private refresh(): void {
         this.activeUser = undefined;
         this.userService.getUsers()
