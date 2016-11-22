@@ -9,6 +9,7 @@ using LanguageJournal.Services;
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace LanguageJournal.Controllers {
+    [Route("api/[controller]")]
     public class SessionsController : Controller {
         private readonly PostgresDbContext _db;
 
@@ -16,6 +17,7 @@ namespace LanguageJournal.Controllers {
             _db = context;
         }
 
+        [Route("signin")]
         [HttpPost]
         public Token SignIn([FromBody]Authenticator auth) {
             return auth.MakeToken();

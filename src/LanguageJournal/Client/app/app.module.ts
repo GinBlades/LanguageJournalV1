@@ -10,6 +10,7 @@ import { UsersComponent } from "./users.component";
 import { UserService } from "./user.service";
 
 import { EntriesComponent } from "./entries.component";
+import { SigninComponent } from "./signin.component";
 import { AppRoutingModule } from "./app-routing.module";
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AppRoutingModule } from "./app-routing.module";
         AppComponent,
         HomeComponent,
         UsersComponent,
-        EntriesComponent
+        EntriesComponent,
+        SigninComponent
     ],
     bootstrap: [AppComponent],
     providers: [UserService]

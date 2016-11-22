@@ -1,0 +1,19 @@
+﻿h1 This is the sign in page.
+.row
+    .col-md-6
+        form(name="signinForm", (ngSubmit)="signin()")
+            dl.dl-horizontal
+                dt
+                    label(for="username") Username
+                dd
+                    input.form-control(name="username", [(ngModel)]="signinUser.username")
+                dt
+                    label(for="email") or Email
+                dd
+                    input.form-control(name="email", [(ngModel)]="signinUser.email")
+                dt
+                    label(for="password") Password
+                dd
+                    input.form-control(name="password", [(ngModel)]="signinUser.password")
+            p
+                button.btn.btn-success(type="submit") Submit
