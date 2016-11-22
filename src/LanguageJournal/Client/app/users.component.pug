@@ -1,20 +1,42 @@
 ﻿h1 This is the users page.
 .row
     .col-md-6
+        p
+            a.btn.btn-primary((click)="newUser()") New User
         ul
             li(*ngFor="let user of users")
-                a((click)="showUser(user.userId)") {{user.name}}
+                ul.list-inline
+                    li
+                        a((click)="showUser(user.userId)") {{user.name}}
+                    li
+                        a.btn.btn-danger.btn-xs((click)="removeUser(user.userId)") X
+
     .col-md-6(*ngIf="activeUser")
         h3 Active User
-        dl.dl-horizontal
-            dt
-                label(for="UserId") ID
-            dd {{activeUser.userId}}
-            dt
-                label(for="name") Name
-            dd
-                input([(ngModel)]="activeUser.name")
-            dt Email
-            dd {{activeUser.email}}
-            dt Bio
-            dd {{activeUser.bio}}
+        form(name="userForm", (ngSubmit)="onSubmit()")
+            dl.dl-horizontal
+                dt
+                    label(for="UserId") ID
+                dd {{activeUser.userId}}
+                dt
+                    label(for="name") Name
+                dd
+                    input.form-control(name="name", [(ngModel)]="activeUser.name")
+                dt
+                    label(for="username") Username
+                dd
+                    input.form-control(name="username", [(ngModel)]="activeUser.username")
+                dt
+                    label(for="email") Email
+                dd
+                    input.form-control(name="email", [(ngModel)]="activeUser.email")
+                dt
+                    label(for="bio") Bio
+                dd
+                    input.form-control(name="bio", [(ngModel)]="activeUser.bio")
+                dt
+                    label(for="password") Password
+                dd
+                    input.form-control(name="password", [(ngModel)]="activeUser.password")
+            p
+                button.btn.btn-success(type="submit") Submit

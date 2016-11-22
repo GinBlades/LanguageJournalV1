@@ -48,7 +48,7 @@ gulp.task("pug", () => {
         .pipe(gulp.dest("wwwroot"));
 })
 
-gulp.task("build", ["copyNpm", "tsc", "sass"]);
+gulp.task("build", ["copyNpm", "tsc", "sass", "pug"]);
 
 gulp.task("watch", () => {
     watch("Client/**/*.ts", batch((events, done) => {
