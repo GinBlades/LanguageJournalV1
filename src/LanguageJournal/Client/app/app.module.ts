@@ -11,6 +11,7 @@ import { UserService } from "./user.service";
 
 import { EntriesComponent } from "./entries.component";
 import { SigninComponent } from "./signin.component";
+import { AuthenticatorService } from "./authenticator.service";
 import { AppRoutingModule } from "./app-routing.module";
 
 @NgModule({
@@ -28,6 +29,9 @@ import { AppRoutingModule } from "./app-routing.module";
         SigninComponent
     ],
     bootstrap: [AppComponent],
-    providers: [UserService]
+    providers: [
+        UserService,
+        AuthenticatorService
+    ]
 })
 export class AppModule { }

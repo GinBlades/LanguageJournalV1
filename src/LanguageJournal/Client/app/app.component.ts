@@ -1,16 +1,24 @@
 ﻿import { Component } from "@angular/core";
-
+import { AuthenticatorService } from "./authenticator.service";
 @Component({
     selector: "my-app",
-    template: `<h1>Language Journal</h1>
-        <nav>
-            <ul>
-                <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-                <li><a routerLink="/users" routerLinkActive="active">Users</a></li>
-                <li><a routerLink="/entries" routerLinkActive="active">Entries</a></li>
-            </ul>
-        </nav>
-        <router-outlet></router-outlet>
-    `
+    templateUrl: "app/app.component.html"
 })
-export class AppComponent { }
+export class AppComponent {
+    public isSignedIn: boolean;
+    private _subscription: any;
+
+    constructor(private authenticatorService: AuthenticatorService) {
+        this._subscription = this.authenticatorService.signInChange.subscribe((value) => {
+            this.isSignedIn = value;
+        });
+    }
+
+    public signOut() {
+        this.authenticatorService.signOut();
+    }
+
+    public ngOnDestroy() {
+        this._subscription.unsubscribe();
+    }
+}
