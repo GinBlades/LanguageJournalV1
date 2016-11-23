@@ -23,13 +23,23 @@ namespace LanguageJournal.Controllers {
         // GET api/users
         [HttpGet]
         public IEnumerable<User> Get() {
-            return _auth.AuthenticateWithResult<IEnumerable<User>>(HttpContext, _db.Users.ToList());
+            var authUser = _auth.AuthenticateHeaders(HttpContext);
+            if (authUser != null) {
+                return _db.Users.ToList();
+            } else {
+                return null;
+            }
         }
 
         // GET api/users/5
         [HttpGet("{id}")]
         public User Get(int id) {
-            return _auth.AuthenticateWithResult<User>(HttpContext, _db.Users.Where(u => u.UserId == id).FirstOrDefault());
+            var authUser = _auth.AuthenticateHeaders(HttpContext);
+            if (authUser != null) {
+                return _db.Users.Where(u => u.UserId == id).FirstOrDefault();
+            } else {
+                return null;
+            }
         }
 
         // POST api/users

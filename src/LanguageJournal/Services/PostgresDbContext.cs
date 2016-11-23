@@ -20,6 +20,11 @@ namespace LanguageJournal.Services {
             base.OnModelCreating(builder);
 
             builder.Entity<Token>().HasKey(t => new { t.UserId, t.Value });
+
+            // https://docs.microsoft.com/en-us/ef/core/modeling/relational/fk-constraints
+            builder.Entity<Token>().HasOne(t => t.User)
+                .WithMany(u => u.Tokens)
+                .HasForeignKey(t => t.UserId);
         }
     }
 }

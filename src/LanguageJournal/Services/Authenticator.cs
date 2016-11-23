@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LanguageJournal.Services {
     public class Authenticator : SigninUser {
@@ -25,12 +26,14 @@ namespace LanguageJournal.Services {
         }
 
         public User AuthenticateByToken(string tokenValue) {
-            User = _db.Tokens.FirstOrDefault(t => t.Value == tokenValue)?.User;
+            User = _db.Tokens.Include(t => t.User).FirstOrDefault(t => t.Value == tokenValue)?.User;
             return User;
         }
 
         public Token MakeToken() {
             if (AuthenticateByLogin() != null) {
+
+                // https://msdn.microsoft.com/en-us/library/system.guid.newguid(v=vs.110).aspx
                 var token = new Token { User = User, Value = Guid.NewGuid().ToString() };
                 _db.Tokens.Add(token);
                 _db.SaveChanges();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace LanguageJournal.Models {
         public string Bio { get; set; }
         [Required]
         public string Password { get; set; }
+
+        [JsonIgnore]
         public virtual List<Token> Tokens { get; set; }
         public virtual List<UserLanguage> UserLanguages { get; set; }
     }

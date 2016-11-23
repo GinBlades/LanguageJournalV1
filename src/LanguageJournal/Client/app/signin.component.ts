@@ -1,5 +1,6 @@
 ﻿import { Component } from "@angular/core";
 import { Http } from "@angular/http";
+import { Router } from "@angular/router";
 import "rxjs/add/operator/map";
 
 @Component({
@@ -9,7 +10,7 @@ import "rxjs/add/operator/map";
 export class SigninComponent {
     public signinUser;
 
-    constructor(private http: Http) {}
+    constructor(private http: Http, private router: Router) {}
 
     public ngOnInit() {
         this.signinUser = {};
@@ -20,6 +21,7 @@ export class SigninComponent {
             .map(res => res.json())
             .subscribe((t) => {
                 localStorage.setItem("accessToken", t.token);
+                this.router.navigate(["/home"]);
             });
     }
 }

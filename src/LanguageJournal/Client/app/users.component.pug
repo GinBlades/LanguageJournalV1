@@ -5,11 +5,9 @@
             a.btn.btn-primary((click)="newUser()") New User
         ul
             li(*ngFor="let user of users")
-                ul.list-inline
-                    li
-                        a((click)="showUser(user.userId)") {{user.name}}
-                    li
-                        a.btn.btn-danger.btn-xs((click)="removeUser(user.userId)") X
+                a((click)="showUser(user.userId)") {{user.name}}
+                | 
+                a.btn.btn-danger.btn-xs((click)="removeUser(user.userId)") X
 
     .col-md-6(*ngIf="activeUser")
         h3 Active User

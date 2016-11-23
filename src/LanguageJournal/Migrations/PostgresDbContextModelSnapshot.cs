@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using LanguageJournal.Services;
-using LanguageJournal.Models;
 
 namespace LanguageJournal.Migrations
 {
