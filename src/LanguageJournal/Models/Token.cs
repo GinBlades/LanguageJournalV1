@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace LanguageJournal.Models {
     // This could probably be a PostgreSQL array type
     public class Token {
-        [Key]
-        [Required]
         [ForeignKey("UserId")]
         public User User { get; set; }
-        [Key]
+
+        [Required]
+        public int UserId { get; set; }
         [Required]
         public string Value { get; set; }
     }

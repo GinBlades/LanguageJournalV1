@@ -18,6 +18,8 @@ namespace LanguageJournal.Services {
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
+
+            builder.Entity<Token>().HasKey(t => new { t.UserId, t.Value });
         }
     }
 }

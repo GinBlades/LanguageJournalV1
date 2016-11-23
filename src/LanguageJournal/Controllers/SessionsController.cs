@@ -19,13 +19,14 @@ namespace LanguageJournal.Controllers {
 
         [Route("signin")]
         [HttpPost]
-        public Token SignIn([FromBody]Authenticator auth) {
-            return auth.MakeToken();
+        public object SignIn([FromBody]SigninUser user) {
+            var auth = new Authenticator(_db) { Username = user.Username, Email = user.Email, Password = user.Password };
+            return new { Token = auth.MakeToken()?.Value };
         }
 
         [HttpDelete]
         public void SignOut(string authToken) {
-            Authenticator auth = new Authenticator(_db);
+            var auth = new Authenticator(_db);
             auth.SignOutWithToken(authToken);
         }
     }

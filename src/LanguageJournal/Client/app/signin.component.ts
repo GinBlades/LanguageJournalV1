@@ -19,7 +19,7 @@ export class SigninComponent {
         this.http.post("/api/sessions/signin", this.signinUser)
             .map(res => res.json())
             .subscribe((t) => {
-                console.log(t);
+                localStorage.setItem("accessToken", t.token);
             });
     }
 }

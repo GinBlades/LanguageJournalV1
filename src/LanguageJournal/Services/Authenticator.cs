@@ -7,12 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace LanguageJournal.Services {
-    public class Authenticator {
+    public class Authenticator : SigninUser {
         private readonly PostgresDbContext _db;
-
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        
         public User User { get; set; }
 
         public Authenticator(PostgresDbContext context) {
@@ -34,7 +31,9 @@ namespace LanguageJournal.Services {
 
         public Token MakeToken() {
             if (AuthenticateByLogin() != null) {
-                var token = new Token { User = User, Value = new Guid().ToString() };
+                var token = new Token { User = User, Value = Guid.NewGuid().ToString() };
+                _db.Tokens.Add(token);
+                _db.SaveChanges();
                 return token;
             }
             return null;
