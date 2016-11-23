@@ -26,7 +26,9 @@ namespace LanguageJournal.Services {
         }
 
         public User AuthenticateByToken(string tokenValue) {
-            User = _db.Tokens.Include(t => t.User).FirstOrDefault(t => t.Value == tokenValue)?.User;
+            // Use 'AsNoTracking' so it does not interfere with other User queries
+            // https://jessedotnet.com/2016/03/17/entity-framework-7-solve-you-large-dataset-performance-issues-with-asnotracking/
+            User = _db.Tokens.AsNoTracking().Include(t => t.User).FirstOrDefault(t => t.Value == tokenValue)?.User;
             return User;
         }
 

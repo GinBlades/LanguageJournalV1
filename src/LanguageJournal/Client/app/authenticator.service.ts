@@ -26,7 +26,7 @@ export class AuthenticatorService {
     }
 
     // https://angular.io/docs/ts/latest/guide/server-communication.html#!#update
-    public authorizedHeaders() {
+    public authorizedHeaders(): RequestOptions {
         let accessToken = localStorage.getItem("accessToken");
         let headerObject = { "Content-Type": "application/json" };
         if (accessToken) {

@@ -58,13 +58,13 @@ namespace LanguageJournal.Controllers {
 
         // PUT api/users/5
         [HttpPut("{id}")]
-        public User Put(int id, [FromBody]User user) {
+        public User Put(int id, [FromBody]User updatedUser) {
             var authUser = _auth.AuthenticateHeaders(HttpContext);
             if (authUser != null) {
-                user.UserId = id;
-                _db.Entry(user).State = EntityState.Modified;
+                updatedUser.UserId = id;
+                _db.Entry(updatedUser).State = EntityState.Modified;
                 _db.SaveChanges();
-                return user;
+                return updatedUser;
             } else {
                 return null;
             }
