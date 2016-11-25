@@ -49,23 +49,5 @@ namespace LanguageJournal.Services {
             _db.Tokens.Remove(token);
             _db.SaveChanges();
         }
-
-        public User AuthenticateHeaders(HttpContext httpContext) {
-            StringValues tokenValues;
-            if (httpContext.Request.Headers.TryGetValue("Token", out tokenValues)) {
-                return AuthenticateByToken(tokenValues.FirstOrDefault());
-            } else {
-                return null;
-            }
-        }
-
-        public T AuthenticateWithResult<T>(HttpContext httpContext, T result) {
-            var user = AuthenticateHeaders(httpContext);
-            if (user != null) {
-                return result;
-            } else {
-                return default(T);
-            }
-        }
     }
 }

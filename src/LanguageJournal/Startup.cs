@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using LanguageJournal.Services;
+using LanguageJournal.Filters;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanguageJournal {
@@ -28,6 +29,7 @@ namespace LanguageJournal {
             // Add framework services.
             services.AddDbContext<PostgresDbContext>(options =>
                 options.UseNpgsql(Configuration["Database:ConnectionString"]));
+            services.AddScoped<AuthenticationFilterAttribute>();
             services.AddMvc();
         }
 
